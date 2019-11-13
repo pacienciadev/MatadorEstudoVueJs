@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Matador de Monstros</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="pannel scores">
+            <div class="score">
+                <h1>Jogador</h1>
+                <div class="life-bar">
+                    <div class="life"
+                        :class="{danger: playerLife < 20}"
+                        :style="{width: playerLife + '%'}"></div>
+                </div>
+                <div>{{ playerLife }}%</div>
+            </div>
+            <div class="score">
+                <h1>Monstro</h1>
+                <div class="life-bar">
+                        <div class="life"
+                        :class="{danger: monsterLife < 20}"
+                        :style="{width: monsterLife + '%'}"></div>
+                </div>
+                <div>{{ monsterLife }}%</div>
+            </div>
+        </div>
+        <div v-if="hasResult" class="pannel result">
+            <div v-if='monsterLife == 0' class="win">Você ganhou! ✌😁</div>
+            <div v-else class="lose">Você perdeu! 🤦‍</div>
+        </div>
+        <div class="pannel buttons">
+            <template v-if="running">
+                <button @click='attack(false)'
+                    class="btn attack">Ataque</button>
+                <button @click='attack(true)'
+                    class="btn especial-attack">Ataque Especial</button>
+                <button @click="healAndHurt"
+                    class="btn heal">Curar</button>
+                <button class="btn give-up"
+                    @click="running = false">Desistir</button>
+            </template>
+            <button v-else class="btn new-game"
+                @click="startGame">Iniciar Jogo</button>
+        </div>
+        <div class="pannel logs">4</div>
+    </div>
+    <script src='app.js'></script>
+</body>
+</html>
