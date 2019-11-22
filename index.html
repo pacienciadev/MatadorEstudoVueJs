@@ -50,7 +50,14 @@
             <button v-else class="btn new-game"
                 @click="startGame">Iniciar Jogo</button>
         </div>
-        <div class="pannel logs">4</div>
+        <div v-if="logs.length"
+            class="pannel logs">
+            <ul>
+                <li v-for="log in logs"
+                    :class="log.cls "
+                    class="log">{{ log.text }}</li>
+            </ul>
+        </div>
     </div>
     <script src='app.js'></script>
 </body>
